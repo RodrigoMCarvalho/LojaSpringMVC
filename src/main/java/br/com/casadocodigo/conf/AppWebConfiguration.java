@@ -6,9 +6,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.controller.HomeController;
+import br.com.casadocodigo.dao.ProdutoDAO;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses= {HomeController.class}) //scanear o pacote da classe HomeController
+@ComponentScan(basePackageClasses= {HomeController.class, ProdutoDAO.class}) //scanear o pacote das classes
 public class AppWebConfiguration {
 	
 	@Bean
