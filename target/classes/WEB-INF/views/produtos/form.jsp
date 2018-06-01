@@ -19,24 +19,29 @@ input, textarea{
 	<form:form action="${s:mvcUrl('PC#gravar').build()}" method="POST" commandName="produto">
 		<div>
 			<label>Título</label>
-			<input type="text" name="titulo"/> 
+			<form:input path="titulo"/>
 			<form:errors path="titulo" cssStyle="color:red; font-weight:bold"/>
 		</div>
 		<div>
 			<label>Descrição</label>
-			<textarea rows="10" cols="20" name="descricao"></textarea>
+			<form:textarea path="descricao" rows="10" cols="20"/>
 			<form:errors path="descricao" cssStyle="color:red; font-weight:bold"/>
 		</div>
 		<div>
 			<label>Páginas</label>
-			<input type="text" name="paginas"/>
+			<form:input path="paginas"/>
 			<form:errors path="paginas" cssStyle="color:red; font-weight:bold"/>
+		</div>
+		<div>
+			<label>Data de lançamento</label>
+			<form:input path="dataNascimento"/>
+			<form:errors path="dataNascimento" cssStyle="color:red; font-weight:bold"/>
 		</div>
 		<c:forEach items="${tipos}" var="tipoPreco" varStatus="status">
 		<div>
 			<label>${tipoPreco}</label>
-			<input type="text" name="precos[${status.index}].valor"/> <!-- ex: precos[0].valor -->
-			<input type="hidden" name="precos[${status.index}].tipo" value="${tipoPreco}"/>
+			<form:input path="precos[${status.index}].valor"/> <!-- ex: precos[0].valor -->
+			<form:hidden path="precos[${status.index}].tipo" value="${tipoPreco}"/>
 		</div>	
 		</c:forEach>
 		<button title="submit">Cadastrar</button>

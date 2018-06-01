@@ -1,5 +1,6 @@
 package br.com.casadocodigo.model;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Produto {
@@ -17,9 +20,11 @@ public class Produto {
 	private String titulo;
 	private String descricao;
 	private int paginas;
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Calendar dataNascimento;
 
-	@ElementCollection // adicionar o preço como parte do produto, sem a necessidade de criar uma outra
-						// tabela(ManyToOne)
+	@ElementCollection // adicionar o preço como parte do produto, sem a necessidade de criar uma outra tabela(ManyToOne)
 	private List<Preco> precos;
 
 	public int getId() {
@@ -60,6 +65,14 @@ public class Produto {
 
 	public void setPrecos(List<Preco> precos) {
 		this.precos = precos;
+	}
+
+	public Calendar getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Calendar dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping("/produtos/form")
-	public ModelAndView form() {
+	public ModelAndView form(Produto produto) { //recebe um valor devido a validação 
 		
 		ModelAndView modelAndView = new ModelAndView("produtos/form");
 		modelAndView.addObject("tipos", TipoPreco.values());  //TipoPreco.values() - retornar todos os valores da classe enum TipoPreco
@@ -45,7 +45,7 @@ public class ProdutosController {
 		//IMPORTANTE: BindingResult tem que vir logo apos do que será validado
 		
 		if (resultado.hasErrors()) { //se tiver erros
-			return form();
+			return form(produto);
 		}
 		dao.salvar(produto);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto salvo com sucesso!"); //adiciona no próximo redirect
