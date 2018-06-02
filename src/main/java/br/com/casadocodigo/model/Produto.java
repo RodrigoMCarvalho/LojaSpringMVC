@@ -26,6 +26,8 @@ public class Produto {
 
 	@ElementCollection // adicionar o preço como parte do produto, sem a necessidade de criar uma outra tabela(ManyToOne)
 	private List<Preco> precos;
+	
+	private String sumarioPath;
 
 	public int getId() {
 		return id;
@@ -74,10 +76,20 @@ public class Produto {
 	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+	
+	public String getSumarioPath() {
+		return sumarioPath;
+	}
 
+	public void setSumarioPath(String sumarioPath) {
+		this.sumarioPath = sumarioPath;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Produto [titulo = " + titulo + ", descricao = " + descricao + ", paginas = " + paginas + "]";
 	}
 
+	
 }

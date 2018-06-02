@@ -16,7 +16,7 @@ input, textarea{
 </style>
 </head>
 <body>
-	<form:form action="${s:mvcUrl('PC#gravar').build()}" method="POST" commandName="produto">
+	<form:form action="${s:mvcUrl('PC#gravar').build()}" method="POST" commandName="produto" enctype="multipart/form-data">
 		<div>
 			<label>Título</label>
 			<form:input path="titulo"/>
@@ -27,7 +27,7 @@ input, textarea{
 			<form:textarea path="descricao" rows="10" cols="20"/>
 			<form:errors path="descricao" cssStyle="color:red; font-weight:bold"/>
 		</div>
-		<div>
+		<div>e
 			<label>Páginas</label>
 			<form:input path="paginas"/>
 			<form:errors path="paginas" cssStyle="color:red; font-weight:bold"/>
@@ -44,10 +44,15 @@ input, textarea{
 			<form:hidden path="precos[${status.index}].tipo" value="${tipoPreco}"/>
 		</div>	
 		</c:forEach>
+		
+		<div>
+			<label>Sumário</label>
+			<input type="file" name="sumario"/>
+		</div>
 		<button title="submit">Cadastrar</button>
 	</form:form>
 	
-	<div style="color:red; font-size:18px; font-weight:bold ">
+	
 		
 		
 		

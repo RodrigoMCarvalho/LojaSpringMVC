@@ -1,6 +1,8 @@
 package br.com.casadocodigo.conf;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -29,6 +31,11 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		encodingFilter.setEncoding("UTF-8");
 		
 		return new Filter[] {encodingFilter};
+	}
+	
+	@Override   //Evitar erro "Unable to process parts as no multi-part configuration has been provided"
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setMultipartConfig(new MultipartConfigElement(""));
 	}
 
 }

@@ -11,10 +11,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.dao.ProdutoDAO;
+import br.com.casadocodigo.infra.FilerSaver;
 import br.com.casadocodigo.model.Produto;
 import br.com.casadocodigo.model.TipoPreco;
 import br.com.casadocodigo.validation.ProdutoValidation;
@@ -24,6 +26,9 @@ public class ProdutosController {
 	
 	@Autowired
 	private ProdutoDAO dao;
+	
+	@Autowired
+	private FilerSaver fileSaver;
 	
 	@InitBinder  //junta a validação no ProdutosController
 	public void initBinder(WebDataBinder binder) {
@@ -40,13 +45,20 @@ public class ProdutosController {
 		return modelAndView;
 	}
 	
+	
 	@RequestMapping(value="/produtos", method=RequestMethod.POST)
-	public ModelAndView gravar(@Valid Produto produto,BindingResult resultado, RedirectAttributes redirectAttributes ) {
+	public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto,BindingResult resultado, 
+				RedirectAttributes redirectAttributes ) {
 		//IMPORTANTE: BindingResult tem que vir logo apos do que será validado
 		
 		if (resultado.hasErrors()) { //se tiver erros
 			return form(produto);
 		}
+		
+		//salvamento de arquivo
+		String path = fileSaver.writer("arquivos-sumario", sumario);
+		produto.setSumarioPath(path);
+		
 		dao.salvar(produto);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto salvo com sucesso!"); //adiciona no próximo redirect
 		
@@ -54,6 +66,7 @@ public class ProdutosController {
 		//OBS: É necessario fazer redirect após o formulário enviar um POST, pois ao pressionar F5, 
 		//os dados são reenviados podendo duplicar informações no banco de dados.
 	}
+	
 	
 	@RequestMapping(value="/produtos", method=RequestMethod.GET)
 	public ModelAndView listar() {

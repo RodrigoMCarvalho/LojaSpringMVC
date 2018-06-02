@@ -8,14 +8,17 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.controller.HomeController;
 import br.com.casadocodigo.dao.ProdutoDAO;
+import br.com.casadocodigo.infra.FilerSaver;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses= {HomeController.class, ProdutoDAO.class}) //scanear o pacote das classes
+@ComponentScan(basePackageClasses= {HomeController.class, ProdutoDAO.class, FilerSaver.class}) //scanear o pacote das classes
 public class AppWebConfiguration {
 	
 	@Bean
@@ -38,7 +41,7 @@ public class AppWebConfiguration {
 		return messageSource;
 	}
 	
-	@Bean //conversão de datas
+	@Bean //conversão de datas - o nome do método é padrão
 	public FormattingConversionService mvcConversionService() {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		DateFormatterRegistrar registrar = new DateFormatterRegistrar();
@@ -49,6 +52,11 @@ public class AppWebConfiguration {
 		return conversionService;
 	}
 	
+	@Bean  //para enviar arquivos para o servidor
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
+		
+	}
 	
 	
 	
