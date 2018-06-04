@@ -34,8 +34,8 @@ input, textarea{
 		</div>
 		<div>
 			<label>Data de lançamento</label>
-			<form:input path="dataNascimento"/>
-			<form:errors path="dataNascimento" cssStyle="color:red; font-weight:bold"/>
+			<form:input path="dataLancamento"/>
+			<form:errors path="dataLancamento" cssStyle="color:red; font-weight:bold"/>
 		</div>
 		<c:forEach items="${tipos}" var="tipoPreco" varStatus="status">
 		<div>
@@ -51,11 +51,7 @@ input, textarea{
 		</div>
 		<button title="submit">Cadastrar</button>
 	</form:form>
-	
-	
-		
-		
-		
+
 	</div>
 
 </body>

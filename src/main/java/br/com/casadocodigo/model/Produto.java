@@ -22,7 +22,7 @@ public class Produto {
 	private int paginas;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Calendar dataNascimento;
+	private Calendar dataLancamento;
 
 	@ElementCollection // adicionar o preço como parte do produto, sem a necessidade de criar uma outra tabela(ManyToOne)
 	private List<Preco> precos;
@@ -68,15 +68,15 @@ public class Produto {
 	public void setPrecos(List<Preco> precos) {
 		this.precos = precos;
 	}
-
-	public Calendar getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Calendar dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
 	
+	public Calendar getDataLancamento() {
+		return dataLancamento;
+	}
+
+	public void setDataLancamento(Calendar dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
 	public String getSumarioPath() {
 		return sumarioPath;
 	}
