@@ -23,6 +23,7 @@ import br.com.casadocodigo.model.TipoPreco;
 import br.com.casadocodigo.validation.ProdutoValidation;
 
 @Controller
+@RequestMapping("/produtos")
 public class ProdutosController {
 	
 	@Autowired
@@ -36,7 +37,7 @@ public class ProdutosController {
 		binder.addValidators(new ProdutoValidation());
 	}
 	
-	@RequestMapping("/produtos/form")
+	@RequestMapping("/form")
 	public ModelAndView form(Produto produto) { //recebe um valor devido a validação 
 		
 		ModelAndView modelAndView = new ModelAndView("produtos/form");
@@ -46,7 +47,7 @@ public class ProdutosController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/produtos", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST) //value="/produtos"
 	public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto,BindingResult resultado, 
 				RedirectAttributes redirectAttributes ) {
 		//IMPORTANTE: BindingResult tem que vir logo apos do que será validado
@@ -67,7 +68,7 @@ public class ProdutosController {
 		//os dados são reenviados podendo duplicar informações no banco de dados.
 	}
 	
-	@RequestMapping(value="/produtos", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET) //value="/produtos"
 	public ModelAndView listar() {
 		List<Produto> produtos = dao.listar();
 		ModelAndView modelAndView = new ModelAndView("produtos/lista");
@@ -76,7 +77,7 @@ public class ProdutosController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/produtos/detalhe/{id}")
+	@RequestMapping("/detalhe/{id}") //value="/produtos"
 	public ModelAndView detalhe(@PathVariable("id") Integer id) {
 		 ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
 		 Produto produto = dao.find(id);

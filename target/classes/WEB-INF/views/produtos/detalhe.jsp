@@ -39,11 +39,9 @@
 				<nav id="main-nav">
 					
 					<ul class="clearfix">
-						<li><a href="/cart" rel="nofollow">Carrinho ( ${carrinhoCompras.quantidade} )</a></li>
+						<li><a href="/cart" rel="nofollow">Seu carrinho (${carrinhoCompras.quantidade}) </a></li>
 
 						<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
-
-						<li><a href="/pages/perguntas-frequentes" rel="nofollow">Perguntas Frequentes</a></li>
 					</ul>
 				</nav>
 			</div>
