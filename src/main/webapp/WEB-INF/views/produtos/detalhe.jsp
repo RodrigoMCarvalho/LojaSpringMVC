@@ -39,7 +39,7 @@
 				<nav id="main-nav">
 					
 					<ul class="clearfix">
-						<li><a href="/cart" rel="nofollow">Seu carrinho (${carrinhoCompras.quantidade}) </a></li>
+						<li><a href="${s:mvcUrl('CCC#itens').build()}" rel="nofollow">Seu carrinho (${carrinhoCompras.quantidade}) </a></li>
 
 						<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
 					</ul>
@@ -99,7 +99,7 @@
 	          </li>
 	    	</c:forEach>           
 	    </ul>
-	    <button type="submit" class="submit-image icon-basket-alt" alt="Compre Agora" title="Compre Agora${produto.titulo}"></button>
+	    <button type="submit" class="submit-image icon-basket-alt" alt="Compre Agora" title="Compre Agora ${produto.titulo}"></button>
 	  </form>
 	  
 	</section>
