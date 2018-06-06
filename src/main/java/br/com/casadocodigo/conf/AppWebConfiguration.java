@@ -8,6 +8,7 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -64,6 +65,14 @@ public class AppWebConfiguration {
 	public MultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
 		
+	}
+	
+	
+	//para evitar o erro: No qualifying bean of type [org.springframework.web.client.RestTemplate] found for dependency: 
+	//expected at least 1 bean which qualifies as autowire candidate for this dependency.
+	@Bean 
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 	
 	

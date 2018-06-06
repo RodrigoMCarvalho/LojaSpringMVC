@@ -23,7 +23,6 @@
 	    <link href="https://cdn.rawgit.com/alura-cursos/spring-mvc-i-criando-aplicacoes-web-master/master/src/main/webapp/resources/css/produtos.css" rel="stylesheet" type="text/css"  media="all"  />	
 	    <link href="https://cdn.rawgit.com/alura-cursos/spring-mvc-i-criando-aplicacoes-web-master/master/src/main/webapp/resources/css/book-collection.css" rel="stylesheet" type="text/css"  media="all"  />
 	    <link href="https://cdn.rawgit.com/alura-cursos/spring-mvc-i-criando-aplicacoes-web-master/master/src/main/webapp/resources/css/checkout-style.css" rel="stylesheet" type="text/css"  media="all"  />
-	
 	<link rel="canonical" href="http://www.casadocodigo.com.br/" />
 </head>
 <body>
@@ -99,8 +98,9 @@
 					</td>
 					<td class="numeric-cell">${carrinhoCompras.getTotal(item)}</td>
 					<td class="remove-item">
-						<form  method="post">
-							<input type="image" src="/excluir.png" alt="Excluir" title="Excluir" />
+						<form action="${s:mvcUrl('CCC#excluir').arg(0, item.produto.id).arg(1, item.tipoPreco).build()}"  
+									 method="post">
+							<input type="image" src="http://cdn.shopify.com/s/files/1/0155/7645/t/177/assets/excluir.png" alt="Excluir" title="Excluir" />
 						</form>
 					</td>
 				</tr>
@@ -109,7 +109,7 @@
 			<tfoot>
 				<tr>
 					<td colspan="3">
-						<form method="post">
+						<form action="${s:mvcUrl('PC#finalizar').build()}" method="post">
 							<input type="submit" class="checkout" name="checkout" value="Finalizar compra" />
 						</form>
 					</td>

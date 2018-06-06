@@ -48,4 +48,17 @@ public class CarrinhoComprasController {
 		return carrinhoItem;
 	}
 	
+	@RequestMapping("/excluir")
+	public ModelAndView excluir(Integer produtoId, TipoPreco tipoPreco) {
+		
+		carrinhoCompras.remover(produtoId, tipoPreco);
+		
+		return new ModelAndView("redirect:/carrinho");
+	}
+	
+	
+	
+	
+	
+	
 }
