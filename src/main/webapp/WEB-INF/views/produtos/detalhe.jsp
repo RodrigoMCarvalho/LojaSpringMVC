@@ -32,7 +32,7 @@
 
   <header id="layout-header">
 		<div class="clearfix container">
-			<a href="/" id="logo">
+			<a href="${s:mvcUrl('HC#index').build() }" id="logo">
 				<img src="https://cdn.rawgit.com/alura-cursos/spring-mvc-i-criando-aplicacoes-web-master/master/src/main/webapp/resources/imagens/cdc-logo.svg" />
 			</a>
 			<div id="header-content">
@@ -69,7 +69,7 @@
 	<article id="${produto.id}">
 		  <header id="product-highlight" class="clearfix">
 		    <div id="product-overview" class="container">
-		      <img width="280px" height="395px" src="http://cdn.shopify.com/s/files/1/0155/7645/products/css-eficiente-featured_large.png?v=1435245145" class="product-featured-image" />
+		      <img width="280px" height="395px" src="https://cdn.shopify.com/s/files/1/0155/7645/products/java8-featured_large.png?v=1411490181" class="product-featured-image" />
 		      <h1 class="product-title">${produto.titulo}</h1>
 		      <p class="product-author">
 		        <span class="product-author-link">

@@ -11,7 +11,7 @@ public class Preco {
 	
 	//@Enumerated(EnumType.STRING) - salvará o enum como string no BD, o padrão salvará como int
 	//String - pode alterar a ordem, mas não renomear
-	//int - pode renomear, mas não alterar a rdem
+	//int - pode renomear, mas não alterar a ordem
 	private TipoPreco tipo;
 
 	public BigDecimal getValor() {
