@@ -1,8 +1,10 @@
 package br.com.casadocodigo.conf;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +18,9 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.fasterxml.jackson.databind.deser.impl.ExternalTypeHandler.Builder;
+import com.google.common.cache.CacheBuilder;
 
 import br.com.casadocodigo.controller.HomeController;
 import br.com.casadocodigo.dao.ProdutoDAO;
@@ -79,8 +84,16 @@ public class AppWebConfiguration {
 	}
 	
 	@Bean   //habilitar o cache
-	public CacheManager cacheManager() {
-		return new ConcurrentMapCacheManager();
+	public CacheManager cacheManager() { //OBS: o tamanha máximo ou o tempo para expiração variam entre aplicações
+		
+		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder()
+				.maximumSize(100)
+				.expireAfterAccess(5, TimeUnit.MINUTES);
+		
+		GuavaCacheManager manager = new GuavaCacheManager();
+		manager.setCacheBuilder(builder);
+		
+		return manager;
 	}
 	
 	

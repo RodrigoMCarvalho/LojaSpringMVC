@@ -64,6 +64,7 @@
 			</exclusions>
 		</dependency>
 
+		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -87,6 +88,8 @@
 			<version>1.2.16</version>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!-- configuracao jpa e driver -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -112,6 +115,8 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.15</version>
 		</dependency>
+
+		<!-- JSR 303 with Hibernate Validator -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -132,5 +137,18 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.1</version>
 		</dependency>
+
+		<!-- Cache Guava da Google e integração Spring-->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.1.0.RELEASE</version>
+		</dependency>
+		
 	</dependencies>
 </project>
