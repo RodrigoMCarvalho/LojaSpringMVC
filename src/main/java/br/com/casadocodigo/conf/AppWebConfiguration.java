@@ -1,5 +1,8 @@
 package br.com.casadocodigo.conf;
 
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,6 +25,7 @@ import br.com.casadocodigo.model.CarrinhoCompras;
 @EnableWebMvc
 @ComponentScan(basePackageClasses= {HomeController.class, ProdutoDAO.class, 
 		FilerSaver.class, CarrinhoCompras.class}) //scanear o pacote das classes
+@EnableCaching  //habilitar o cache
 public class AppWebConfiguration {
 	
 	@Bean
@@ -67,7 +71,6 @@ public class AppWebConfiguration {
 		
 	}
 	
-	
 	//para evitar o erro: No qualifying bean of type [org.springframework.web.client.RestTemplate] found for dependency: 
 	//expected at least 1 bean which qualifies as autowire candidate for this dependency.
 	@Bean 
@@ -75,6 +78,10 @@ public class AppWebConfiguration {
 		return new RestTemplate();
 	}
 	
+	@Bean   //habilitar o cache
+	public CacheManager cacheManager() {
+		return new ConcurrentMapCacheManager();
+	}
 	
 	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -48,6 +49,7 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST) //value="/produtos"
+	@CacheEvict(value="produtosHome",allEntries=true) //atualizar a cache após salvar, todas as entradas
 	public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto,BindingResult resultado, 
 				RedirectAttributes redirectAttributes ) {
 		//IMPORTANTE: BindingResult tem que vir logo apos do que será validado
@@ -77,16 +79,14 @@ public class ProdutosController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/detalhe/{id}") //value="/produtos"
+	@RequestMapping("/detalhe/{id}") //value="/produtos/detalhe/{id}"
 	public ModelAndView detalhe(@PathVariable("id") Integer id) {
 		 ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
 		 Produto produto = dao.find(id);
 		 System.out.println(produto);
 		 
 		 modelAndView.addObject("produto", produto); 
-		 
-		 
-		 
+
 		 return modelAndView;
 	}
 	

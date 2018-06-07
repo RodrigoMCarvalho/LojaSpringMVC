@@ -27,7 +27,7 @@ input, textarea{
 			<form:textarea path="descricao" rows="10" cols="20"/>
 			<form:errors path="descricao" cssStyle="color:red; font-weight:bold"/>
 		</div>
-		<div>e
+		<div>
 			<label>Páginas</label>
 			<form:input path="paginas"/>
 			<form:errors path="paginas" cssStyle="color:red; font-weight:bold"/>
