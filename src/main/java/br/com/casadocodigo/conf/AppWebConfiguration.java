@@ -1,5 +1,7 @@
 package br.com.casadocodigo.conf;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.cache.CacheManager;
@@ -13,13 +15,15 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.fasterxml.jackson.databind.deser.impl.ExternalTypeHandler.Builder;
 import com.google.common.cache.CacheBuilder;
 
 import br.com.casadocodigo.controller.HomeController;
@@ -84,7 +88,7 @@ public class AppWebConfiguration {
 	}
 	
 	@Bean   //habilitar o cache
-	public CacheManager cacheManager() { //OBS: o tamanha máximo ou o tempo para expiração variam entre aplicações
+	public CacheManager cacheManager() { //OBS: o tamanho máximo ou o tempo para expiração variam entre aplicações
 		
 		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder()
 				.maximumSize(100)
@@ -96,6 +100,17 @@ public class AppWebConfiguration {
 		return manager;
 	}
 	
+	@Bean   //retornar em formato json
+	public ViewResolver contentNegotiationViewResolver(ContentNegotiationManager manager) {
+		List<ViewResolver> viewResolvers = new ArrayList<>();
+		viewResolvers.add(internalResourceViewResolver());
+		viewResolvers.add(new JsonViewResolver());
+		
+		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+		resolver.setViewResolvers(viewResolvers); 
+		
+		return resolver;
+	}
 	
 	
 	
