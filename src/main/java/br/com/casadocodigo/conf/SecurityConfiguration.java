@@ -24,7 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/carrinho").permitAll()
 			.antMatchers("/produtos/**").permitAll()
 			.antMatchers("/").permitAll()
-			.anyRequest().authenticated()  //qualquer request será autenticado e enviado para tela de login
+			.anyRequest().authenticated()  //qualquer request autenticado e enviado para tela de login
 			.and().formLogin();
 	}
 	
