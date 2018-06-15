@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import br.com.casadocodigo.dao.UsuarioDAO;
 
@@ -23,9 +24,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/produtos").hasRole("ADMIN")
 			.antMatchers("/carrinho").permitAll()
 			.antMatchers("/produtos/**").permitAll()
+			.antMatchers("/resources/**").permitAll()  //para após logar não direcionar para o CSS
 			.antMatchers("/").permitAll()
 			.anyRequest().authenticated()  //qualquer request autenticado e enviado para tela de login
-			.and().formLogin();
+			.and().formLogin().loginPage("/login").permitAll()
+			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 	
 	@Override

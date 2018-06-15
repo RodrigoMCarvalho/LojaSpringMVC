@@ -42,6 +42,7 @@ input, textarea {
 				<security:authentication property="principal" var="usuario"/>
 				Olá, ${usuario}
 			</a></li>
+			<li><a href="${s:mvcUrl('LC#logout').build()}">Logout</a></li>
 		</ul>
 		
 	</div>
